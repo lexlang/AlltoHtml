@@ -73,6 +73,18 @@ public class PoiUtil {
         return html;
     } 
     
+    public static String txtToHtml(byte[] baos) throws UnsupportedEncodingException{
+    	String[] decodes={"utf-8","gbk","gb2312"};
+    	for(String decode:decodes){
+    		String html=new String(baos,decode);
+    		if(! isMessyCode(html)){
+    			return html;
+    		}
+    	}
+    	return new String(baos,"utf-8");
+    }
+    
+    
     private static String pdfToHtml(InputStream in,String encoding){  
         try {   
             PDFParser parser = new PDFParser(in);   
